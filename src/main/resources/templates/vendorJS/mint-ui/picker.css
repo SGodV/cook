@@ -1,0 +1,64 @@
+.mint-popup{
+    width:100%;
+}
+
+.picker-btn-wrap {
+    width:100%;
+    background-color:#eee;
+    height:100px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size:35px;
+
+}
+.picker-btn-wrap .picker-cancel{
+    width:100px;
+    height:60px;
+    line-height:60px;
+    border:1px solid orangered;
+    background-color:white;
+    color:orangered;
+    text-align:center;
+    margin-left:1em;
+}
+
+.picker-btn-wrap .picker-sure{
+    width:100px;
+    height:60px;
+    line-height:60px;
+    border:1px solid orangered;
+    background-color:orangered;
+    color:white;
+    text-align:center;
+    margin-right:1em;
+}
+
+.picker-items{
+    height:500px;
+}
+.picker-item{
+    height:100px;
+    line-height:100px;
+}
+.picker-item .picker-selected{
+    color:orangered;
+}
+.picker-center-highlight{
+    height: 100px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 50%;
+    margin-top: -50px;
+    pointer-events: none;
+}
+
+
+
+
+
+
+
+

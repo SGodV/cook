@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.FoodInfoMapper">
+
+    <select id="selectAll" resultType="com.example.cook.dto.Foodinfo">
+        SELECT f.id, f.name, f.categoryid, ft.name as categoryName, f.price, f.num, f.`desc` FROM foodinfo f inner join foodcategory ft
+        on f.categoryid = ft.id
+        where 1=1
+        <if test="id != null">
+            and f.id = #{id}
+        </if>
+        <if test="name != null">
+            and f.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="selectFoodInfoOne" resultType="com.example.cook.dto.Foodinfo">
+        select * from foodinfo where name = #{foodinfo.name}
+    </select>
+
+    <insert id="insertFoodInfo" parameterType="com.example.cook.dto.Foodinfo">
+        insert into foodinfo(categoryid, name, price, num, `desc`)
+        values (#{foodinfo.categoryid},#{foodinfo.name},#{foodinfo.price},#{foodinfo.num},#{foodinfo.desc})
+    </insert>
+
+    <delete id="deleteFoodInfoById" parameterType="java.lang.Integer">
+        delete from foodinfo where id = #{id}
+    </delete>
+
+    <update id="updateFoodInfo" parameterType="com.example.cook.dto.Foodinfo">
+        update foodinfo set
+        name=#{foodinfo.name},
+        categoryid=#{foodinfo.categoryid},
+        price=#{foodinfo.price},
+        num=#{foodinfo.num},
+        `desc`=#{foodinfo.desc}
+        WHERE id=#{foodinfo.id}
+    </update>
+
+    <select id="selectIsBand" resultType="java.lang.Integer">
+        select count(1) from foodinfo where categoryid = #{categoryid}
+    </select>
+
+</mapper>

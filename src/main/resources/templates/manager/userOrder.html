@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>厨房小帮手</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./icheck/minimal/red.css">
+    <link rel="stylesheet" type="text/css" href="otherCss/score.css">
+  <script type="text/javascript" src="util.js"></script>
+
+    <script type="text/javascript" src="../vendorJS/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../commonJs/common.js"></script>
+    <script type="text/javascript" src="./javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="./layui/layui.js"></script>
+    <script type="text/javascript" src="./icheck/icheck.js"></script>
+    <script type="text/javascript" src="./javascript/dw.js"></script>
+    <script type="text/javascript" src="otherJs/userOrder.js"></script>
+</head>
+<body class="layui-layout-body">
+<!--弹出层（详情）-->
+<form class="layui-form" id="info" style="display: none">
+    <div style="margin-right: 20px">
+        <br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单编号</label>
+            <div class="layui-form-mid layui-word-aux"><span id="infoName"></span></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">送达时间</label>
+            <div class="layui-form-mid layui-word-aux" id="infoUser"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">配送地址</label>
+            <div class="layui-form-mid layui-word-aux" id="infoDesc"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-form-mid layui-word-aux" id="infoStep"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单状态</label>
+            <div class="layui-form-mid layui-word-aux" id="infoEva"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单食材</label>
+            <div class="layui-form-mid layui-word-aux" id="infoHas"></div>
+        </div>
+    </div>
+</form>
+
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+      <div class="layui-logo" style="position: absolute;width: 80%;left: 0;right: 0;bottom: 0;right: 0;margin: auto;">
+          <span style="float: left;">厨房小帮手</span>
+          <span style="float: right;">欢迎:<span id="userName"></span>&nbsp;&nbsp;<a href="/index.html" style="color: red" id="logout">退出</a></span>
+      </div>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+
+          <li class="layui-nav-item"><a href="dishInfo.html" class="layui-this">菜谱信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="userOrder.html" >订单信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="score.html">修改密码</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+         <!-- 这是添加资源的显示框 -->
+        <div class="add-xontaner" id="addCon" style="display:none;">
+            <div class="base2"><input type="text" class="ip" placeholder="请输类别名称" id="studentUsername"></div>
+            <div class="base2"><input type="text" class="ip" placeholder="请输入类别描述" id="studentPassword"></div>
+            <div class="input-button">
+                <div class="item-b" style="background-color:#1E9FFF;" id="confirm">确认</div>
+                <div class="item-b" style="background-color:#FF5722;" id="cancel">取消</div>
+            </div>
+        </div>
+
+          <!-- 主显示页面 -->
+         <fieldset style="padding:20px 10px;">
+        <legend class="title">订单信息管理</legend>
+        <div class="button-group">
+            <button class="base" style="background-color: #009688;" id="refresh"><i class="layui-icon">&#x1002;</i>刷新</button>
+        </div>
+         <table class="layui-table" id="table" style="font-size:30px;">
+             <colgroup>
+                 <col width="100">
+                 <col width="150">
+                 <col width="200">
+                 <col width="180">
+                 <col width="80">
+                 <col width="200">
+             </colgroup>
+             <thead>
+             <tr>
+                 <th>订单编号</th>
+                 <th>送达时间</th>
+                 <th>配送地址</th>
+                 <th>联系电话</th>
+                 <th>订单状态</th>
+                 <th style="text-align:center;">操作</th>
+             </tr>
+             </thead>
+             <tbody>
+             </tbody>
+         </table>
+      </fieldset>
+    </div>
+      <div class="layui-footer">
+          <!-- 底部固定区域 -->
+          <div style="width:100%;height:100%;display:flex;align-items: center;justify-content: flex-end;">
+              <div style="height:80%;display:flex;align-items: center;">
+                  <div style="background-color:#aaa;height:100%;display:flex;align-items:center;justify-content: center;width:100px;" id="front">上一页</div>
+                  <input style="background-color:white;height:100%;display:flex;align-items:center;justify-content: center;width:80px;border:none;text-align:center;" value="1" id="page"/>
+                  <div style="background-color:#aaa;height:100%;display:flex;align-items:center;justify-content: center;width:100px;" id="next">下一页</div>
+              </div>
+          </div>
+      </div>
+
+</div>
+
+</body>
+</html>

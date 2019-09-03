@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.DishEvaMapper">
+
+    <delete id="deleteDishEva" parameterType="java.lang.Integer">
+        delete from disheva where dishid = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.example.cook.dto.Disheva">
+        SELECT d.id,d.dishid,d.user,d.content,a.name as userName FROM disheva d inner join admin a on d.user = a.id
+        where d.dishid = #{dishId}
+        union all
+        SELECT d.id,d.dishid,d.user,d.content,u.name as userName FROM disheva d inner join user u on d.user = u.id
+        where d.dishid = #{dishId}
+    </select>
+
+    <insert id="insertDishEva" parameterType="com.example.cook.dto.Disheva">
+        insert into disheva(dishid, `user`, content)
+        values (#{dishEva.dishid},#{dishEva.user},#{dishEva.content})
+    </insert>
+
+</mapper>

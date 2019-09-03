@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.DishStepMapper">
+
+    <insert id="insertDishStep">
+        INSERT INTO dishstep(dishid, `desc`)
+        VALUES (#{dishId},#{desc})
+    </insert>
+
+    <delete id="deleteDishStep" parameterType="java.lang.Integer">
+        delete from dishstep where dishid = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.DishHasMapper">
+
+    <insert id="insertDishHas">
+        INSERT INTO dishhas(dishid, foodid)
+        VALUES
+        <foreach collection="foodList" item="item" separator=",">
+            (#{dishId},#{item})
+        </foreach>
+    </insert>
+
+    <delete id="deleteDishHas" parameterType="java.lang.Integer">
+        delete from dishhas where dishid = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.example.cook.dto.Dishhas">
+        SELECT d.id,d.foodid,d.dishid,f.name as foodName FROM dishhas d inner join foodinfo f on d.foodid = f.id
+        where d.dishid = #{dishId}
+    </select>
+
+</mapper>

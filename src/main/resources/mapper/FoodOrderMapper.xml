@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.FoodOrderMapper">
+
+    <select id="selectAll" resultType="com.example.cook.dto.Foodorder">
+        SELECT f.id,f.userid,f.dishid,f.adress,f.phone,f.status,f.time,u.name as userName FROM foodorder f inner join user u
+        on f.userid = u.id
+        where 1=1
+        <if test="id != null">
+            and f.id = #{id}
+        </if>
+        <if test="name != null">
+            and u.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="selectByUserId" resultType="com.example.cook.dto.Foodorder">
+        SELECT f.id,f.userid,f.dishid,f.adress,f.phone,f.status,f.time,u.name as userName FROM foodorder f inner join user u
+        on f.userid = u.id
+        where f.userid = #{userId}
+    </select>
+
+    <insert id="insertFoodOrder" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.cook.dto.Foodorder">
+        insert into foodorder(userid, dishid, `time`, adress, phone, status)
+        values (#{foodOrder.userid},#{foodOrder.dishid},#{foodOrder.time},#{foodOrder.adress},#{foodOrder.phone},#{foodOrder.status})
+    </insert>
+
+    <delete id="deleteFoodOrderById" parameterType="java.lang.Integer">
+        delete from foodorder where id = #{id}
+    </delete>
+
+    <update id="updateFoodOrder" parameterType="com.example.cook.dto.Foodorder">
+        update foodorder
+        set status = #{foodOrder.status}
+        where id = #{foodOrder.id}
+    </update>
+
+</mapper>

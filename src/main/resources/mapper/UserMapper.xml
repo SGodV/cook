@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.UserMapper">
+
+    <select id="selectAllUser" resultType="com.example.cook.dto.User">
+        select * from user
+    </select>
+
+    <select id="selectUser" resultType="com.example.cook.dto.User">
+        select * from user where username = #{user.username} and password = #{user.password}
+    </select>
+
+    <select id="selectAll" resultType="com.example.cook.dto.User">
+        SELECT * FROM user
+        where 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="name != null">
+            and name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="selectUserOne" resultType="com.example.cook.dto.User">
+        select * from user where username = #{user.username}
+    </select>
+
+    <insert id="insertUser" parameterType="com.example.cook.dto.User">
+        insert into user(username, password, name, sex, phone, email, city)
+        values (#{user.username},#{user.password},#{user.name},#{user.sex},#{user.phone},#{user.email},#{user.city})
+    </insert>
+
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+    </delete>
+
+    <delete id="deleteuserByIds" parameterType="java.lang.Integer">
+        delete from user
+        where id in
+        <foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateUser" parameterType="com.example.cook.dto.User">
+        update user set
+        username=#{user.username},
+        password=#{user.password},
+        name=#{user.name},
+        sex=#{user.sex},
+        phone=#{user.phone},
+        email=#{user.email},
+        city=#{user.city}
+        WHERE id=#{user.id}
+    </update>
+
+    <update id="updateUserPass" parameterType="com.example.cook.dto.User">
+        update user set
+        password=#{user.password},
+        name=#{user.name}
+        WHERE id=#{user.id}
+    </update>
+
+</mapper>

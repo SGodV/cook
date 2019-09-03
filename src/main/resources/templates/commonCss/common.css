@@ -1,0 +1,16 @@
+body{
+    background-image:url("../user/images/back.jpg");
+    width:100%;
+    overflow: hidden;
+    background-size:cover;
+    overflow-y:auto;
+    padding-bottom:20px;
+}
+
+*{
+    margin:0;
+    padding:0;
+}
+.at{
+    font-size:50px;
+}

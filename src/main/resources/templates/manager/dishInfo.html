@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>厨房小帮手</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./icheck/minimal/red.css">
+    <link rel="stylesheet" type="text/css" href="otherCss/score.css">
+    <script type="text/javascript" src="util.js"></script>
+
+    <script type="text/javascript" src="../vendorJS/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../commonJs/common.js"></script>
+    <script type="text/javascript" src="./javascript/jquery.min.js"></script>
+
+    <script type="text/javascript" src="./icheck/icheck.js"></script>
+
+    <script type="text/javascript" src="./layui/layui.js"></script>
+<!--    <script type="text/javascript" src="./javascript/dw.js"></script>-->
+    <script type="text/javascript" src="./otherJs/dishInfo.js"></script>
+
+
+</head>
+<body class="layui-layout-body">
+<!--弹出层（新增）-->
+<form class="layui-form" id="test" style="display: none">
+    <div style="margin-right: 20px">
+        <br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜谱名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="dishName" id="dishName" required  lay-verify="required" placeholder="请输入菜谱名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜谱描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="dishDesc" id="dishDesc" required  lay-verify="required" placeholder="请输入菜谱描述" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜谱用料</label>
+            <div class="layui-input-block" id="category">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">菜谱步骤</label>
+            <div class="layui-input-block">
+                <textarea name="dishStep" id="dishStep" placeholder="请输入菜谱步骤,例如:(1)...(2)...(3)..." class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--弹出层（详情）-->
+<form class="layui-form" id="info" style="display: none">
+    <div style="margin-right: 20px">
+        <br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜谱名称</label>
+            <div class="layui-form-mid layui-word-aux"><span id="infoName"></span></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">贡献用户</label>
+            <div class="layui-form-mid layui-word-aux" id="infoUser"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜谱描述</label>
+            <div class="layui-form-mid layui-word-aux" id="infoDesc"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜谱用料</label>
+            <div class="layui-form-mid layui-word-aux" id="infoHas"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜谱步骤</label>
+            <div class="layui-form-mid layui-word-aux" id="infoStep"></div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">评价列表</label>
+            <div class="layui-form-mid layui-word-aux" id="infoEva"></div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">评论</label>
+            <div class="layui-input-block">
+                <textarea name="desc" placeholder="请输入内容" id="dishEva" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--弹出层（下单）-->
+<form class="layui-form" id="order" style="display: none">
+    <div style="margin-right: 20px">
+        <br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">送达时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="dishName" id="orderTime" required  lay-verify="required" placeholder="请输入送达时间,例如:yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">配置地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="dishDesc" id="orderAdress" required  lay-verify="required" placeholder="请输入配送地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-block">
+                <input type="text" name="dishDesc" id="orderPhone" required  lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="position: absolute;width: 80%;left: 0;right: 0;bottom: 0;right: 0;margin: auto;">
+            <span style="float: left;">厨房小帮手</span>
+            <span style="float: right;">欢迎:<span id="userName"></span>&nbsp;&nbsp;<a href="/index.html" style="color: red" id="logout">退出</a></span>
+        </div>
+  </div>
+
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+          <li class="layui-nav-item"><a href="dishInfo.html" class="layui-this">菜谱信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="userOrder.html" >订单信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="score.html">修改密码</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+
+        <!-- 主显示页面 -->
+        <fieldset style="padding:20px 10px;">
+            <legend class="title">菜谱信息管理</legend>
+            <div class="button-group">
+                <button class="base" style="background-color: #1E9FFF;" id="add"> <i class="layui-icon">&#xe654;</i>添加</button>
+                <button class="base" style="background-color: #009688;" id="refresh"><i class="layui-icon">&#x1002;</i>刷新</button>
+            </div>
+            <table class="layui-table" id="table" style="font-size:30px;">
+                <colgroup>
+                    <col width="120">
+                    <col width="120">
+                    <col width="120">
+                    <col width="220">
+                    <col width="290">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>菜谱编号</th>
+                    <th>菜谱名称</th>
+                    <th>贡献用户</th>
+                    <th>菜谱描述</th>
+                    <th style="text-align:center;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+
+      <div class="layui-footer">
+          <!-- 底部固定区域 -->
+          <div style="width:100%;height:100%;display:flex;align-items: center;justify-content: flex-end;">
+              <div style="height:100%;display:flex;align-items: center;margin-right:5%;">
+                  菜谱编号：
+                  <input type="text" placeholder="请输入菜谱编号" style="height:78%;border:none;text-align:center;margin-right:50px;" id="studentId">
+                  菜谱名称：
+                  <input type="text" placeholder="请输入菜谱名称" style="height:78%;border:none;text-align:center;" id="studentName">
+                  <div style="width:100px;background-color:orangered;height:80%;color:white;text-align:center;display:flex;align-items:center;justify-content: center;" id="search">查询</div>
+              </div>
+              <div style="height:80%;display:flex;align-items: center;">
+                  <div style="background-color:#aaa;height:100%;display:flex;align-items:center;justify-content: center;width:100px;" id="front">上一页</div>
+                  <input style="background-color:white;height:100%;display:flex;align-items:center;justify-content: center;width:80px;border:none;text-align:center;" value="1" id="page"/>
+                  <div style="background-color:#aaa;height:100%;display:flex;align-items:center;justify-content: center;width:100px;" id="next">下一页</div>
+              </div>
+          </div>
+      </div>
+</div>
+    <script type="text/javascript">
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
+    </script>
+</body>
+</html>

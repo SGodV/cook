@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>厨房小帮手</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./icheck/minimal/red.css">
+    <script type="text/javascript" src="util.js"></script>
+  <link rel="stylesheet" type="text/css" href="otherCss/professional.css">
+    <link rel="stylesheet" type="text/css" href="otherCss/score.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <script src="./layui/layui.js"></script>
+
+    <script type="text/javascript" src="../vendorJS/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../commonJs/common.js"></script>
+    <script type="text/javascript" src="./javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="./layui/layui.js"></script>
+    <script type="text/javascript" src="./icheck/icheck.js"></script>
+    <script type="text/javascript" src="./javascript/dw.js"></script>
+    <script type="text/javascript" src="otherJs/professional.js"></script>
+
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="position: absolute;width: 80%;left: 0;right: 0;bottom: 0;right: 0;margin: auto;">
+            <span style="float: left;">厨房小帮手</span>
+            <span style="float: right;">欢迎:<span id="userName"></span>&nbsp;&nbsp;<a href="./login/index.html" style="color: red" id="logout">退出</a></span>
+        </div>
+  </div>
+
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+          <li class="layui-nav-item"><a href="student.html" class="layui-this">用户信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="user.html" >食材类别管理</a></li>
+
+          <li class="layui-nav-item"><a href="professionalTwo.html">食材信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="dishInfo.html">菜谱信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="adminOrder.html">订单信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="foodPur.html">采购信息管理</a></li>
+
+          <li class="layui-nav-item"><a href="score.html">修改密码</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+          <!-- 这是添加资源的显示框 -->
+        <div class="add-xontaner" id="addCon" style="display:none;">
+            <div class="base2"><input type="text" class="ip" placeholder="请输食材名称" id="studentUsername"></div>
+            <div class="base2">
+                <select name="category" id="category" lay-verify="required" placeholder="请输入食材类别" style="width: 150px">
+                <option value="">请选择食材类别</option>
+            </select></div>
+            <div class="base2"><input type="text" class="ip" placeholder="请输入价格" id="stuName"></div>
+            <div class="base2"><input type="text" class="ip" placeholder="请输入数量" id="stuSex"></div>
+            <div class="base2"><input type="text" class="ip" placeholder="请输入描述" id="stuPhone"></div>
+            <div class="input-button">
+                <div class="item-b" style="background-color:#1E9FFF;" id="confirm">确认</div>
+                <div class="item-b" style="background-color:#FF5722;" id="cancel">取消</div>
+            </div>
+        </div>
+
+
+        <!-- 主显示页面 -->
+        <fieldset style="padding:20px 10px;">
+            <legend class="title">食材信息管理</legend>
+            <div class="button-group">
+                <button class="base" style="background-color: #1E9FFF;" id="add"> <i class="layui-icon">&#xe654;</i>添加</button>
+                <button class="base" style="background-color: #009688;" id="refresh"><i class="layui-icon">&#x1002;</i>刷新</button>
+            </div>
+            <table class="layui-table" id="table" style="font-size:30px;">
+                <colgroup>
+                    <col width="80">
+                    <col width="100">
+                    <col width="100">
+                    <col width="100">
+                    <col width="100">
+                    <col width="200">
+                    <col width="200">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>食材编号</th>
+                    <th>食材名称</th>
+                    <th>食材类别</th>
+                    <th>价格</th>
+                    <th>库存数量</th>
+                    <th>描述</th>
+                    <th style="text-align:center;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+
+      <div class="layui-footer">
+          <!-- 底部固定区域 -->
+          <div style="width:100%;height:100%;display:flex;align-items: center;justify-content: flex-end;">
+              <div style="height:100%;display:flex;align-items: center;margin-right:5%;">
+                  类别编号：
+                  <input type="text" placeholder="请输入类别编号" style="height:78%;border:none;text-align:center;margin-right:50px;" id="studentId">
+                  类别名称：
+                  <input type="text" placeholder="请输入类别名称" style="height:78%;border:none;text-align:center;" id="studentName">
+                  <div style="width:100px;background-color:orangered;height:80%;color:white;text-align:center;display:flex;align-items:center;justify-content: center;" id="search">查询</div>
+              </div>
+              <div style="height:80%;display:flex;align-items: center;">
+                  <div style="background-color:#aaa;height:100%;display:flex;align-items:center;justify-content: center;width:100px;" id="front">上一页</div>
+                  <input style="background-color:white;height:100%;display:flex;align-items:center;justify-content: center;width:80px;border:none;text-align:center;" value="1" id="page"/>
+                  <div style="background-color:#aaa;height:100%;display:flex;align-items:center;justify-content: center;width:100px;" id="next">下一页</div>
+              </div>
+          </div>
+      </div>
+</div>
+
+</body>
+</html>

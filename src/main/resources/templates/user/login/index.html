@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>login</title>
+<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<link rel="stylesheet" href="../layui/css/layui.css">
+	<script src="../layui/layui.js"></script>
+	<script src="../../commonJs/common.js"></script>
+	<script src="../../vendorJS/jquery-3.4.1.min.js"></script>
+<script src="index.js"></script>
+<script src="../util.js"></script>
+<!--[if IE]>
+<script src="js/html5.js"></script>
+<script>
+	//一般直接写在一个js文件中
+	layui.use(['layer', 'form'], function(){
+		var layer = layui.layer
+				,form = layui.form;
+
+		layer.msg('Hello World');
+	});
+</script>
+	<![endif]-->
+<style>
+	input::-webkit-input-placeholder{
+		color:rgba(0, 0, 0, 0.726);
+	}
+	input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+		color:rgba(0, 0, 0, 0.726);
+	}
+	input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+		color:rgba(0, 0, 0, 0.726);
+	}
+	input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+		color:rgba(0, 0, 0, 0.726);
+	}
+</style>
+</head>
+<body>
+		<div class="container demo-1" style="width:100%;height:100vh;">
+			<div class="content">
+				<div id="large-header" class="large-header" style="width:100%;height:100vh;">
+					
+					<div class="logo_box">
+						<h3>厨房小帮手</h3>
+						<form>
+							<div class="input_outer">
+								<span class="u_user"></span>
+								<input id="ID" name="logname" class="text" style="color: #000000 !important" type="text" placeholder="请输入账户">
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<input id="PASSWORD" name="logpass" class="text" style="color: #000000 !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
+							</div>
+							<div class="layui-input-block" style="margin-left: 106px;min-height: 21px;">
+								<input type="radio" name="type" value="普通用户" title="普通用户" checked >普通用户
+								<input type="radio" name="type" value="管理员" title="管理员" >管理员
+							</div>
+							<div id="LOGIN" class="mb2"><a class="act-but submit" href="javascript:;"  style="color: #FFFFFF">登录</a></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<div style="text-align:center;">
+</div>
+	</body>
+</html>

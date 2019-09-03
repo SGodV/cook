@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.AdminMapper">
+
+    <select id="selectAdmin" resultType="com.example.cook.dto.Admin">
+        select * from admin where username = #{admin.username} and password = #{admin.password}
+    </select>
+
+    <update id="updateAdmin" parameterType="com.example.cook.dto.Admin">
+        update admin set
+        password=#{admin.password},
+        name=#{admin.name}
+        WHERE id=#{admin.id}
+    </update>
+
+    <select id="selectAdminOne" resultType="com.example.cook.dto.Admin">
+        select * from admin where username = #{admin.username}
+    </select>
+
+</mapper>

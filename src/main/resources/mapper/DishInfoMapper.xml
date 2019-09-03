@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.DishInfoMapper">
+
+    <select id="selectAll" resultType="com.example.cook.dto.Dishinfo">
+        SELECT d.id, d.name, d.userid, a.name as userName, d.`desc`, ds.`desc` as stepDesc FROM dishinfo d inner join admin a
+        on d.userid = a.id inner join dishstep ds on d.id = ds.dishid
+        where 1=1
+        <if test="id != null">
+            and d.id = #{id}
+        </if>
+        <if test="name != null">
+            and d.name LIKE CONCAT('%',#{name},'%')
+        </if>
+        union all
+        SELECT d.id, d.name, d.userid, u.name as userName, d.`desc`, ds.`desc` as stepDesc FROM dishinfo d inner join user u
+        on d.userid = u.id inner join dishstep ds on d.id = ds.dishid
+        where 1=1
+        <if test="id != null">
+            and d.id = #{id}
+        </if>
+        <if test="name != null">
+            and d.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="selectById" resultType="com.example.cook.dto.Dishinfo">
+        SELECT d.id, d.name, d.userid, a.name as userName, d.`desc`, ds.`desc` as stepDesc FROM dishinfo d inner join admin a
+        on d.userid = a.id inner join dishstep ds on d.id = ds.dishid
+        where d.id = #{id}
+        union all
+        SELECT d.id, d.name, d.userid, u.name as userName, d.`desc`, ds.`desc` as stepDesc FROM dishinfo d inner join user u
+        on d.userid = u.id inner join dishstep ds on d.id = ds.dishid
+        where d.id = #{id}
+    </select>
+
+    <select id="selectDishInfoOne" resultType="com.example.cook.dto.Dishinfo">
+        select * from dishinfo where name = #{dishInfo.name}
+    </select>
+
+    <insert id="insertDishInfo" parameterType="com.example.cook.dto.Dishinfo">
+        insert into dishinfo(name, userid, `desc`)
+        values (#{dishInfo.name},#{dishInfo.userid},#{dishInfo.desc})
+    </insert>
+
+    <delete id="deleteDishInfoById" parameterType="java.lang.Integer">
+        delete from dishinfo where id = #{id}
+    </delete>
+
+</mapper>

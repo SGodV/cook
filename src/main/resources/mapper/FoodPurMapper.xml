@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.FoodPurMapper">
+
+    <select id="selectAll" resultType="com.example.cook.dto.Foodpur">
+        SELECT f.id,f.foodid,f.num,f.status,fi.name as foodName FROM foodpur f inner join foodinfo fi
+        on f.foodid = fi.id
+        where 1=1
+        <if test="id != null">
+            and f.id = #{id}
+        </if>
+        <if test="name != null">
+            and fi.name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <insert id="insertFoodPur" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.cook.dto.Foodorder">
+        insert into foodpur(foodid, num, status)
+        values (#{foodPur.foodid},#{foodPur.num},#{foodPur.status})
+    </insert>
+
+    <delete id="deleteFoodPurById" parameterType="java.lang.Integer">
+        delete from foodpur where id = #{id}
+    </delete>
+
+</mapper>

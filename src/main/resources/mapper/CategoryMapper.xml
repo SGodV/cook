@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cook.mapper.CategoryMapper">
+
+    <select id="selectAll" resultType="com.example.cook.dto.Foodcategory">
+        SELECT * FROM foodcategory
+        where 1=1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="name != null">
+            and name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="selectCategoryOne" resultType="com.example.cook.dto.Foodcategory">
+        select * from foodcategory where name = #{category.name}
+    </select>
+
+    <insert id="insertCategory" parameterType="com.example.cook.dto.Foodcategory">
+        insert into foodcategory(name, `desc`)
+        values (#{category.name},#{category.desc})
+    </insert>
+
+    <delete id="deleteCategoryById" parameterType="java.lang.Integer">
+        delete from foodcategory where id = #{id}
+    </delete>
+
+    <update id="updateCategory" parameterType="com.example.cook.dto.Foodcategory">
+        update foodcategory set
+        name=#{category.name},
+        `desc`=#{category.desc}
+        WHERE id=#{category.id}
+    </update>
+
+</mapper>
